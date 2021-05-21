@@ -123,7 +123,7 @@ pd($_REQUEST);
 //Offer post-startup api calls
 if(
   isset($_REQUEST['key']) &&
-  isset($_REQUEST['action'])
+  isset($_GET['action'])
 ){
   //Check API key
   include_once('Config.php');
@@ -131,7 +131,7 @@ if(
     die('Invalid Key.');
   }
   //User is authenticated for secure API requests
-  switch($_REQUEST['action']){
+  switch($_GET['action']){
     case 'enterMissing':
       if(isset($_POST['symbol'])){
         
