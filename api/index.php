@@ -259,7 +259,9 @@ function HandleEnterMissingPost($Symbol,$Coins){
         $Data = file_get_contents($Filename);
         $JSON = json_decode($Data,true);
         foreach($JSON['data'] as $Key => $Coin){
+          $Found = false;
           if($Coin['symbol'] == $Symbol){
+            $Found = true;
             
             $Key = $Symbol.date('Ymd',$Date);
             if(
@@ -278,6 +280,9 @@ function HandleEnterMissingPost($Symbol,$Coins){
             }else{
               echo '<p>No update value submitted for date '.date('Y-m-d',$Date).', skipping.</p>';
             }
+          }
+          if($Found == false){
+            echo "<p>Can't find matching coin for '.$Symbol.' in '.$Filename.'</p>";
           }
         }
       }else{
