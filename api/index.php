@@ -272,8 +272,8 @@ function HandleEnterMissingPost($Symbol,$Coins){
               $JSON['data'][$Key]['quote']['USD']['price'] = $NewValue;
               $Updated = json_encode($JSON,JSON_PRETTY_PRINT);
               $Filename = 'cache/'.date('Y-m-d',$Date).'.json';
-              file_put_contents($Filename,$Updated);
-              echo '<p>File "'.$Filename.'" updated for coin '.$Symbol.'.</p>';
+              $Result = file_put_contents($Filename,$Updated);
+              echo '<p>File "'.$Filename.'" updated for coin '.$Symbol.'. ('.var_export($Result,true).')</p>';
               
             }else{
               echo '<p>No update value submitted for date '.date('Y-m-d',$Date).', skipping.</p>';
