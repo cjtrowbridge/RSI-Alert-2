@@ -72,6 +72,8 @@ body{
           ");
         $.get(item.Path, function(data){
           console.log(data);
+          var rsi = data.summary.RSI-14;
+          alert(rsi);
           $.each(data, function(i, item){
             
           });
