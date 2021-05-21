@@ -200,7 +200,11 @@ foreach($Coins as $Coin){
     echo '<p><a href="./?action=enterMissing&symbol='.$Symbol.'">Click here</a> to enter missing data for '.$Symbol.'.</p>';
   }
   $RS[$Symbol]['summary'] = array(
+    'Gain Sum'          => $GainSum,
+    'Gain Count'        => $GainCount,
     'Average Gain'      => $GainSum / $GainCount,
+    'Loss Sum'          => $LossSum,
+    'Loss Count'        => $LossCount,
     'Average Loss'      => $LossSum / $LossCount,
     'Relative Strength' => 1 + (( $GainSum / $GainCount ) / ($LossSum / $LossCount)),
     'RSI-14'            => 100 - (100/(1 + (( $GainSum / $GainCount ) / ($LossSum / $LossCount))))
