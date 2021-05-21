@@ -77,24 +77,22 @@ for ($i = 0; $i <= 14; $i++) {
         'status' => array(
           'timestamp' => date('Y-m-d H:i:s',$Date)
         ),
-        'data' => array(
-          
-        );
-        foreach($Coins as $Symbol => $Coin){
-          $New = array(
-            'name'   => $Coin['name'],
-            'symbol' => $Coin['symbol'],
-            'slug'   => $Coin['slug'],
-            'quote' => array(
-              'USD' => array(
-                'price' => ''
-              )
-            )
-          );
-          $Data['data'][]=$New;
-        }
-        var_dump($Data);
+        'data' => array()
       );
+      foreach($Coins as $Symbol => $Coin){
+        $New = array(
+          'name'   => $Coin['name'],
+          'symbol' => $Coin['symbol'],
+          'slug'   => $Coin['slug'],
+          'quote' => array(
+            'USD' => array(
+              'price' => ''
+            )
+          )
+        );
+        $Data['data'][]=$New;
+      }
+      var_dump($Data);
     }else{
       echo '<p>Data Missing For Date: '.date('Y-m-d',$Date).'</p>';
       $Missing = true;
