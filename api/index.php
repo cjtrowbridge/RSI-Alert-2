@@ -21,11 +21,17 @@ for ($i = 0; $i <= 14; $i++) {
     $JSON = json_decode($Data,true);
     foreach($JSON['data'] as $Coin){
       $Name = $Coin['name'];
+      $Symbol = $Coin['symbol'];
       if(
-        (!(isset($Coins[$Name]))) ||
-        (!(is_array($Coins[$Name])))
+        (!(isset($Coins[$Symbol]))) ||
+        (!(is_array($Coins[$Symbol])))
       ){
-        $Coins[$Name] = array();
+        $Coins[$Symbol] = array(
+          'Name' => $Name, 
+          'Timeseries' => array(
+            date('Y-m-d',$Date) => $Coin['quote']['USD']['price']
+          )
+        );
       }
       
     }
