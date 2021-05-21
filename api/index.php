@@ -132,7 +132,7 @@ if(
       if(isset($_POST['symbol'])){
         die('Handle enter missing post.');
       }else{
-        EnterMissing($_REQUEST['symbol']);
+        EnterMissing($_REQUEST['symbol'],$Coins);
       }
       break;
   }
@@ -178,7 +178,7 @@ foreach($Coins as $Coin){
 }
 
 
-function EnterMissing($Symbol){
+function EnterMissing($Symbol,$Coins){
   echo '<h2>Checking For Missing '.$Symbol.' Data...</h2>'."\n";
   echo '<form action="./?enterMissing" method="post">'."\n";
   echo '<input type="hidden" name="symbol" value="'.$Symbol.'">'."\n";
