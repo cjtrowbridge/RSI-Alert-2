@@ -74,7 +74,7 @@ for ($i = 0; $i <= 14; $i++) {
 }
 
 if($Missing == true){
-  echo '<p><a href="./?action=createMissing">Click here</a> to create empty files for missing dates.</p>'
+  echo '<p><a href="./?action=createMissing">Click here</a> to create empty files for missing dates.</p>';
 }
 
 echo '<pre>';
