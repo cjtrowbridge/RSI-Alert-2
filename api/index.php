@@ -18,8 +18,11 @@ if(!(file_exists($Filename))){
 
 $CreateMissing = false;
 if(
-  (!(isset($_GET['key']))) &&
-  isset($_GET['action'])
+  isset($_GET['action']) &&
+  (!(
+    isset($_GET['key']) ||
+    isset($_POST['key'])
+  ))
 ){
   //Prompt for missing API key
   echo '<!DOCTYPE html>';
@@ -39,7 +42,10 @@ if(
 ){
   //Check API key
   include_once('Config.php');
-  if($_GET['key'] != $LocalKey){
+  if(!(
+    ($_GET['key'] == $LocalKey) ||
+    ($_POST['key'] == $LocalKey)
+  )){
     die('Invalid Key.');
   }
   //User is authenticated for secure API requests
