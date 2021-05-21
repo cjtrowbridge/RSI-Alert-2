@@ -83,9 +83,12 @@ body{
             indicator = "overbought";
           }
           $("#"+symbol).find(".content").html("<p>Current RSI-14 value is "+rsi+" which indicates <a href=\"https://www.investopedia.com/terms/r/rsi.asp\" target=\"\">"+indicator+"</a>.</p>");
-          $("#"+symbol).find(".content").append("<p>In order to reach oversold, the price today would have to move to x.</p>");
-          $("#"+symbol).find(".content").append("<p>In order to reach overbought, the price today would have to move to y.</p>");
-          
+          if(rsi>30){
+            $("#"+symbol).find(".content").append("<p style=\"color: #68de7c;\">In order to reach oversold, the price today would have to move to x.</p>");
+          }
+          if(rsi<70){
+            $("#"+symbol).find(".content").append("<p style=\"color: #e65054;\">In order to reach overbought, the price today would have to move to y.</p>");
+          }
         });
       });
     });
