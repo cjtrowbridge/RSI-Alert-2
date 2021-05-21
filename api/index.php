@@ -10,6 +10,7 @@ if(!(file_exists($Filename))){
   file_put_contents($Filename,$Data);
 }
 
+$CreateMissing = false;
 if(
   isset($_GET['action']) &&
   (!(isset($_GET['key'])))
@@ -19,7 +20,7 @@ if(
   echo '<p>Authentication Required. Please enter API Key:</p>';
   echo '<form action=./? method="get">';
   echo '  <input type="hidden" name="action" value="'.$_GET['action'].'">';
-  echo '  <input type="text" name="key" id="key">';
+  echo '  <input type="password" name="key" id="key">';
   echo '  <input type="submit">';
   echo '</form>';
   echo '<script>document.getElementById("key").focus();</script>';
@@ -36,7 +37,7 @@ if(
   //User is authenticated for secure API requests
   switch($_GET['action']){
     case 'createMissing':
-      die('Create missing files');
+      $CreateMissing = true;
       break;
   }
 }
@@ -68,8 +69,13 @@ for ($i = 0; $i <= 14; $i++) {
       
     }
   }else{
-    echo '<p>Data Missing For Date: '.date('Y-m-d',$Date).'</p>';
-    $Missing = true;
+    if($CreateMissing == true){
+      echo '<p>Creating missing file: '.date('Y-m-d',$Date).'</p>';
+      var_dump($Coins);
+    }else{
+      echo '<p>Data Missing For Date: '.date('Y-m-d',$Date).'</p>';
+      $Missing = true;
+    }
   }
 }
 
