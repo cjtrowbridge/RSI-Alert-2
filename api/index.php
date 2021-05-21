@@ -110,6 +110,8 @@ if($Missing == true){
 //Create Gain/Loss Table for each coin
 $RS = array();
 foreach($Coins as $Coin){
+  echo '<h2>Generating RS Table For '.$Coin['symbol'].'</h2>';
+  var_dump($Coin);
   $RS[$Coin['Symbol']]=array();
   for($i = 0; $i <= 14; $i++){
     $Date = time() - (60*60*24*$i);
