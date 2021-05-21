@@ -47,13 +47,6 @@ if(
     case 'createMissing':
       $CreateMissing = true;
       break;
-    case 'enterMissing':
-      if(isset($_POST['symbol'])){
-        die('Handle enter missing post.');
-      }else{
-        EnterMissing($_REQUEST['symbol']);
-      }
-      break;
   }
 }
 
@@ -123,6 +116,29 @@ if($Missing == true){
 }
 
 
+//Offer post-startup api calls
+if(
+  isset($_GET['key']) &&
+  isset($_GET['action'])
+){
+  //Check API key
+  include_once('Config.php');
+  if($_GET['key'] != $LocalKey){
+    die('Invalid Key.');
+  }
+  //User is authenticated for secure API requests
+  switch($_GET['action']){
+    case 'enterMissing':
+      if(isset($_POST['symbol'])){
+        die('Handle enter missing post.');
+      }else{
+        EnterMissing($_REQUEST['symbol']);
+      }
+      break;
+  }
+}
+
+
 //Create Gain/Loss Table for each coin
 $RS = array();
 foreach($Coins as $Coin){
@@ -167,6 +183,7 @@ function EnterMissing($Symbol){
   echo '<form action="./?enterMissing" method="post">'."\n";
   echo '<input type="hidden" name="symbol" value="'.$Symbol.'">'."\n";
   echo '<table>'."\n";
+  
   foreach($Coins as $Coin){
     for($i = 0; $i <= 14; $i++){
       $Date = time() - (60*60*24*$i);
