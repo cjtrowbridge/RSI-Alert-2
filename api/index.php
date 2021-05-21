@@ -258,8 +258,8 @@ function HandleEnterMissingPost($Symbol,$Coins){
       if(file_exists($Filename)){
         $Data = file_get_contents($Filename);
         $JSON = json_decode($Data,true);
+        $Found = false;
         foreach($JSON['data'] as $Key => $Coin){
-          $Found = false;
           if($Coin['symbol'] == $Symbol){
             $Found = true;
             
@@ -281,9 +281,9 @@ function HandleEnterMissingPost($Symbol,$Coins){
               echo '<p>No update value submitted for date '.date('Y-m-d',$Date).', skipping.</p>';
             }
           }
-          if($Found == false){
-            echo "<p>Can't find matching coin for '.$Symbol.' in '.$Filename.'</p>";
-          }
+        }
+        if($Found == false){
+          echo "<p>Can't find matching coin for '.$Symbol.' in '.$Filename.'</p>";
         }
       }else{
         echo '<p>Date file missing: '.$Filename.'. Try <a href="./?action=createMissing">creating missing files</a>.</p>';
