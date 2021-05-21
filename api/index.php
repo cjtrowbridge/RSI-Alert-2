@@ -263,14 +263,14 @@ function HandleEnterMissingPost($Symbol,$Coins){
           if($Coin['symbol'] == $Symbol){
             $Found = true;
             
-            $Key = $Symbol.date('Ymd',$Date);
+            $PostKey = $Symbol.date('Ymd',$Date);
             if(
-              isset($_POST[$Key]) &&
-              (floatval($_POST[$Key])>0)
+              isset($_POST[$PostKey]) &&
+              (floatval($_POST[$PostKey])>0)
             ){
               
               //Okay let's update the file with this new value...
-              $NewValue = $_POST[$Key];
+              $NewValue = $_POST[$PostKey];
               $JSON['data'][$Key]['quote']['USD']['price'] = $NewValue;
               $Updated = json_encode($JSON,JSON_PRETTY_PRINT);
               $Filename = 'cache/'.date('Y-m-d',$Date).'.json';
