@@ -77,12 +77,14 @@ body{
           var indicator = "nothing";
           if(rsi<=30){
             $("#"+symbol).css("background-color","#68de7c");
-            indicator = "underbought";
+            indicator = "oversold";
           }else if(rsi>=70){
             $("#"+symbol).css("background-color","#e65054");
             indicator = "overbought";
           }
-          $("#"+symbol).find(".content").html("Current RSI-14 value is "+rsi+" which indicates <a href=\"https://www.investopedia.com/terms/r/rsi.asp\" target=\"\">"+indicator+"</a>.");
+          $("#"+symbol).find(".content").html("<p>Current RSI-14 value is "+rsi+" which indicates <a href=\"https://www.investopedia.com/terms/r/rsi.asp\" target=\"\">"+indicator+"</a>.</p>");
+          $("#"+symbol).find(".content").append("<p>In order to reach oversold, the price today would have to move to x.</p>");
+          $("#"+symbol).find(".content").append("<p>In order to reach overbought, the price today would have to move to y.</p>");
           
         });
       });
