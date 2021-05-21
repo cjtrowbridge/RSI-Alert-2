@@ -156,6 +156,7 @@ if(
 //Create Gain/Loss Table for each coin
 $RS = array();
 foreach($Coins as $Coin){
+  $First = true;
   $Symbol = $Coin['Symbol'];
   $Missing = array();
   echo '<h2>Generating RS-14 Table For '.$Coin['Name'].'</h2>';
@@ -169,7 +170,7 @@ foreach($Coins as $Coin){
   $LossSum = 0;
   $LossCount = 0;
   //Skip today
-  for($i = 1; $i <= 14; $i++){
+  for($i = 0; $i <= 14; $i++){
     $Date = time() - (60*60*24*$i);
     $Open = '';
     
@@ -183,6 +184,12 @@ foreach($Coins as $Coin){
           $Open = $Coin['quote']['USD']['price'];
         }
       }
+    }
+    
+    if($First){
+      $First = false;
+      $Close = $Open;
+      continue;
     }
     
     $Change = $Close - $Open;
