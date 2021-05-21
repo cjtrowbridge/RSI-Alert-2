@@ -106,5 +106,15 @@ if($Missing == true){
   echo '<p><a href="./?action=createMissing">Click here</a> to create empty files for missing dates.</p>';
 }
 
-echo '<pre>';
-var_dump($Coins);
+
+//Create Gain/Loss Table for each coin
+$RS = array();
+foreach($Coins as $Coin){
+  $RS[$Coin['Symbol']]=array();
+  for($i = 0; $i <= 14; $i++){
+    $Date = time() - (60*60*24*$i);
+    $RS[$Coin['Symbol']][date('Y-m-d',$Date)]=array();
+  }
+}
+
+var_dump($RS);
