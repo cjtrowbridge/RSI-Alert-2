@@ -220,6 +220,7 @@ foreach($Coins as $Coin){
   echo '<p><a href="./?action=edit&symbol='.$Symbol.'">Click here</a> to edit data for '.$Symbol.'.</p>';
   
   $RS[$Symbol]['summary'] = array(
+    'Updated'           => date('Y-m-d');
     'Gain Sum'          => $GainSum,
     'Gain Count'        => $GainCount,
     'Average Gain'      => $GainSum / $GainCount,
@@ -230,6 +231,11 @@ foreach($Coins as $Coin){
     'RSI-14'            => 100 - (100/(1 + (( $GainSum / $GainCount ) / ($LossSum / $LossCount))))
   );
   pd($RS[$Symbol]);
+  
+  //Save RSI Table
+  $Filename = strtolower($Symbol).'.json';
+  $Updated = json_encode($JSON,JSON_PRETTY_PRINT);
+  $Result = file_put_contents($Filename,$Updated);
   
   //Done with this coin
 }
