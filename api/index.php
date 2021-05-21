@@ -179,6 +179,7 @@ foreach($Coins as $Coin){
 
 
 function EnterMissing($Symbol,$Coins){
+  echo $First = true;
   echo '<h2>Checking For Missing '.$Symbol.' Data...</h2>'."\n";
   echo '<form action="./?enterMissing" method="post">'."\n";
   echo '<input type="hidden" name="symbol" value="'.$Symbol.'">'."\n";
@@ -206,7 +207,12 @@ function EnterMissing($Symbol,$Coins){
             echo '    <td>Date: '.date('Y-m-d',$Date).'</td>'."\n";
             if($Open==''){
               //We need to get this value
-              echo '    <td>Open Price: <input type="text" name="'.$Symbol.date('Ymd',$Date).'"></td>'."\n";
+              if($First){
+                $Frist = false;
+                echo '    <td>Open Price: <input id="first" type="text" name="'.$Symbol.date('Ymd',$Date).'"></td>'."\n";
+              }else{
+                echo '    <td>Open Price: <input type="text" name="'.$Symbol.date('Ymd',$Date).'"></td>'."\n";
+              }
             }else{
               //We have this value already
               echo '    <td>Open Price: '.$Open.'</td>'."\n";
@@ -229,5 +235,6 @@ function EnterMissing($Symbol,$Coins){
   echo '</table>'."\n";
   echo '<input type="submit">'."\n";
   echo '</form>';
+  echo '<script>document.getElementById("first").focus();</script>';
   exit;
 }
