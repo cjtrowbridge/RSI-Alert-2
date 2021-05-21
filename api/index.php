@@ -18,8 +18,8 @@ if(!(file_exists($Filename))){
 
 $CreateMissing = false;
 if(
-  isset($_GET['action']) &&
-  (!(isset($_GET['key'])))
+  (!(isset($_GET['key']))) &&
+  isset($_GET['action'])
 ){
   //Prompt for missing API key
   echo '<!DOCTYPE html>';
