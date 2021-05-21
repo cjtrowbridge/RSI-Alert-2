@@ -219,7 +219,7 @@ function Edit($Symbol,$Coins){
   echo '<h2>Editing '.$Symbol.' Data...</h2>'."\n";
   echo '<form action="./?action=edit" method="post">'."\n";
   echo '<input type="hidden" name="symbol" value="'.$Symbol.'">'."\n";
-  echo '<input type="key" name="key" value="'.$_GET['key'].'">'."\n";
+  echo '<input type="hidden" name="key" value="'.$_GET['key'].'">'."\n";
   echo '<table>'."\n";
   
   $Coin = $Coins[$Symbol];
