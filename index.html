@@ -28,9 +28,9 @@ body{
       Sign Up For Email Alerts
     </div>
     
-    <div class="container" id="container"  data-masonry='{"percentPosition": true }'>
+    <div class="container">
       
-      <div class="row">
+      <div class="row" id="card-container" data-masonry='{"percentPosition": true }'>
         <div class="col-md-6">
           <div class="card my-4">
             <div class="card-body">
@@ -56,7 +56,7 @@ body{
     $.get("api/coins.json", function(data){
       console.log(data);
       $.each(data, function(i, item){
-        $('#container').append("\
+        $('#card-container').append("\
           <div class=\"row\">\
             <div class=\"col-md-6\">\
               <div class=\"card my-4\">\
