@@ -24,7 +24,7 @@ for ($i = 0; $i <= 14; $i++) {
       if(
         (!(isset($Coins[$Name]))) ||
         (!(is_array($Coins[$Name])))
-      )){
+      ){
         $Coins[$Name] = array();
       }
       
