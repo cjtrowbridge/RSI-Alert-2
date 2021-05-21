@@ -233,6 +233,12 @@ foreach($Coins as $Coin){
   );
   pd($RS[$Symbol]);
   
+  if(
+    $Symbol==''
+  ){
+    continue;
+  }
+  
   //Make a file that shows what coins are being tracked, and then make files for all those coins
   if($RS[$Symbol]['summary']['RSI-14'] != 100){
     $Filename = strtolower($Symbol).'.json';
