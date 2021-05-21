@@ -55,12 +55,14 @@ for ($i = 0; $i <= 14; $i++) {
     foreach($JSON['data'] as $Coin){
       $Name = $Coin['name'];
       $Symbol = $Coin['symbol'];
+      $Slug = $Coin['slug'];
       if(
         (!(isset($Coins[$Symbol]))) ||
         (!(is_array($Coins[$Symbol])))
       ){
         $Coins[$Symbol] = array(
           'Name' => $Name, 
+          'Slug' => $Slug,
           'Timeseries' => array(
             date('Y-m-d',$Date) => $Coin['quote']['USD']['price']
           )
@@ -71,7 +73,28 @@ for ($i = 0; $i <= 14; $i++) {
   }else{
     if($CreateMissing == true){
       echo '<p>Creating missing file: '.date('Y-m-d',$Date).'</p>';
-      var_dump($Coins);
+      $Data = array(
+        'status' = array(
+          'timestamp' => date('Y-m-d H:i:s',$Date)
+        ),
+        'data' => array(
+          
+        );
+        foreach($Coins as $Symbol => $Coin){
+          $New = array(
+            'name'   => $Coin['name'],
+            'symbol' => $Coin['symbol'],
+            'slug'   => $Coin['slug'],
+            'quote' => array(
+              'USD' => array(
+                'price' => ''
+              )
+            )
+          );
+          $Data['data'][]=$New;
+        }
+        var_dump($Data);
+      );
     }else{
       echo '<p>Data Missing For Date: '.date('Y-m-d',$Date).'</p>';
       $Missing = true;
