@@ -117,7 +117,6 @@ if($Missing == true){
 
 
 $_GET['action'] = 'enterMissing';
-
 pd($_REQUEST);
 
 //Offer post-startup api calls
@@ -134,7 +133,7 @@ if(
   switch($_GET['action']){
     case 'enterMissing':
       if(isset($_POST['symbol'])){
-        
+        HandleEnterMissingPost($_REQUEST['symbol'],$Coins);
         die('Handle enter missing post.');
       }else{
         EnterMissing($_REQUEST['symbol'],$Coins);
@@ -242,5 +241,48 @@ function EnterMissing($Symbol,$Coins){
   echo '<input type="submit">'."\n";
   echo '</form>';
   echo '<script>document.getElementById("first").focus();</script>';
+  exit;
+}
+
+
+function HandleEnterMissingPost($Symbol,$Coins){
+ 
+  $Coin = $Coins[$Symbol];
+  
+    for($i = 0; $i <= 14; $i++){
+      $Date = time() - (60*60*24*$i);
+      $Open = '';
+
+      //Try to find the open price for this symbol and date
+      $Filename = 'cache/'.date('Y-m-d',$Date).'.json';
+      if(file_exists($Filename)){
+        $Data = file_get_contents($Filename);
+        $JSON = json_decode($Data,true);
+        foreach($JSON['data'] as $Key => $Coin){
+          if($Coin['symbol'] == $Symbol){
+            
+            $Key = $Symbol.date('Ymd',$Date);
+            if(
+              isset($_POST[$Key]) &&
+              (floatval($_POST[$Key])>0)
+            ){
+              
+              //Okay let's update the file with this new value...
+              $NewValue = $_POST[$Key];
+              $JSON['data'][$Key]['quote']['USD']['price'] = $NewValue;
+              $JSON = json_encode($Data,JSON_PRETTY_PRINT);
+              $Filename = 'cache/'.date('Y-m-d',$Date).'.json';
+              file_put_contents($Filename,$JSON);
+              echo '<p>File "'.$Filename.'" updated for coin '.$Symbol.'.</p>';
+              
+            }else{
+              echo '<p>Missing input value for date '.date('Y-m-d',$Date).'.</p>';
+            }
+          }
+        }
+      }else{
+        echo '<p>Date file missing: '.$Filename.'. Try <a href="./?action=createMissing">creating missing files</a>.</p>';
+      }
+    }
   exit;
 }
