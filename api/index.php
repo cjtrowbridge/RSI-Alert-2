@@ -127,12 +127,12 @@ if(
   }
   //User is authenticated for secure API requests
   switch($_GET['action']){
-    case 'enterMissing':
+    case 'edit':
       if(isset($_POST['symbol'])){
-        HandleEnterMissingPost($_REQUEST['symbol'],$Coins);
+        HandleEditPost($_REQUEST['symbol'],$Coins);
         die('Handle enter missing post.');
       }else{
-        EnterMissing($_REQUEST['symbol'],$Coins);
+        Edit($_REQUEST['symbol'],$Coins);
       }
       break;
   }
@@ -197,7 +197,7 @@ foreach($Coins as $Coin){
   } 
   //If we couldn't some data then prompt the user to input it.
   if(count($Missing)==0){
-    echo '<p><a href="./?action=enterMissing&symbol='.$Symbol.'">Click here</a> to enter missing data for '.$Symbol.'.</p>';
+    echo '<p><a href="./?action=edit&symbol='.$Symbol.'">Click here</a> to enter missing data for '.$Symbol.'.</p>';
   }
   $RS[$Symbol]['summary'] = array(
     'Gain Sum'          => $GainSum,
@@ -215,10 +215,10 @@ foreach($Coins as $Coin){
 }
 
 
-function EnterMissing($Symbol,$Coins){
+function Edit($Symbol,$Coins){
   echo $First = true;
-  echo '<h2>Checking For Missing '.$Symbol.' Data...</h2>'."\n";
-  echo '<form action="./?action=enterMissing" method="post">'."\n";
+  echo '<h2>Editing '.$Symbol.' Data...</h2>'."\n";
+  echo '<form action="./?action=edit" method="post">'."\n";
   echo '<input type="hidden" name="symbol" value="'.$Symbol.'">'."\n";
   echo '<input type="key" name="key" value="'.$_GET['key'].'">'."\n";
   echo '<table>'."\n";
@@ -243,17 +243,11 @@ function EnterMissing($Symbol,$Coins){
             
             echo '  <tr>'."\n";
             echo '    <td>Date: '.date('Y-m-d',$Date).'</td>'."\n";
-            if($Open==''){
-              //We need to get this value
-              if($First){
-                $Frist = false;
-                echo '    <td>Open Price: <input id="first" type="text" name="'.$Symbol.date('Ymd',$Date).'"></td>'."\n";
-              }else{
-                echo '    <td>Open Price: <input type="text" name="'.$Symbol.date('Ymd',$Date).'"></td>'."\n";
-              }
+            if($First){
+              $Frist = false;
+              echo '    <td>Open Price: <input id="first" type="text" name="'.$Symbol.date('Ymd',$Date).'" value="'.$Open.'"></td>'."\n";
             }else{
-              //We have this value already
-              echo '    <td>Open Price: '.$Open.'</td>'."\n";
+              echo '    <td>Open Price: <input type="text" name="'.$Symbol.date('Ymd',$Date).'" value="'.$Open.'"></td>'."\n";
             }
             echo '  </tr>'."\n";
             
@@ -278,7 +272,7 @@ function EnterMissing($Symbol,$Coins){
 }
 
 
-function HandleEnterMissingPost($Symbol,$Coins){
+function HandleEditPost($Symbol,$Coins){
  
   echo '<h2>Updating Cache</h2>';
   echo '<h3>Input Recieved;</h3>';
