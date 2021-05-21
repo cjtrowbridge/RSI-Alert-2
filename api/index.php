@@ -122,8 +122,21 @@ foreach($Coins as $Coin){
   $RS[$Symbol]=array();
   for($i = 0; $i <= 14; $i++){
     $Date = time() - (60*60*24*$i);
-    $RS[$Symbol][date('Y-m-d',$Date)]=array();
+    $Open = '';
     
+    //Try to find the open price for this symbol and date
+    $Filename = 'cache/'.date('Y-m-d',$Date).'.json';
+    if(file_exists($Filename)){
+      $Data = file_get_contents($Filename);
+      $JSON = json_decode($Data,true);
+      foreach($JSON['data'] as $Coin){
+        if($Coin['symbol'] == $Symbol){
+          $Open = $Coin['quote']['USD']['price'];
+        }
+      }
+    }
+    
+    $RS[$Symbol][date('Y-m-d',$Date)]=array('Open' => $Open);
   }
   pd($RS[$Symbol]);
 }
