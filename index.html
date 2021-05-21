@@ -63,7 +63,7 @@ body{
                 <div class=\"card-body\">\
                   <div class=\"card-text\">\
                     <h1 class=\"display-1\">"+item.Name+"</h1>\
-                    <div class=\"\">\
+                    <div class=\"content\">\
                     Loading Data...</div>\
                   </div><!--/card-text-->\
                 </div><!--/card-body-->\
@@ -74,15 +74,16 @@ body{
           console.log(data);
           var rsi = data.summary["RSI-14"];
           var symbol = data.summary["Symbol"];
+          var indicator = "nothing";
           if(rsi<=30){
             $("#"+symbol).css("background-color","#68de7c");
+            indicator = "underbought";
           }else if(rsi>=70){
             $("#"+symbol).css("background-color","#e65054");
+            indicator = "overbought";
           }
+          $("#"+symbol).find(".content").html("RSI-14 Value "+rsi+"which indicates "+indicator+".");
           
-          $.each(data, function(i, item){
-            
-          });
         });
       });
     });
