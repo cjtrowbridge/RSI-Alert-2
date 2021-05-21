@@ -19,7 +19,7 @@ for ($i = 0; $i <= 14; $i++) {
   if(file_exists($Filename)){
     $Data = file_get_contents($Filename);
     $JSON = json_decode($Data);
-    foreach($JSON['data'] as $Coin){
+    foreach($JSON->data as $Coin){
       $Name = $Coin['name'];
       if(
         (!(isset($Coins[$Name]))) ||
