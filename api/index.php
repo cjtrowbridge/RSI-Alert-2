@@ -229,7 +229,7 @@ foreach($Coins as $Coin){
     'Loss Count'        => $LossCount,
     'Average Loss'      => $LossSum / $LossCount,
     'Relative Strength' => 1 + (( $GainSum / $GainCount ) / ($LossSum / $LossCount)),
-    'RSI-14'            => 100 - (100/(1 + (( $GainSum / $GainCount ) / ($LossSum / $LossCount))))
+    'RSI-14'            => round(100 - (100/(1 + (( $GainSum / $GainCount ) / ($LossSum / $LossCount)))))
   );
   pd($RS[$Symbol]);
   
