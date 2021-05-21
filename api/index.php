@@ -22,7 +22,7 @@ if(
   echo '  <input type="text" name="key" id="key">';
   echo '  <input type="submit">';
   echo '</form>';
-  echo '<script>document.getElementById("key").focus();</script>'
+  echo '<script>document.getElementById("key").focus();</script>';
   exit;
 }elseif(
   isset($_GET['key']) &&
