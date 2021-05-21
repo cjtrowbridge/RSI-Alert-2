@@ -74,7 +74,7 @@ for ($i = 0; $i <= 14; $i++) {
     if($CreateMissing == true){
       echo '<p>Creating missing file: '.date('Y-m-d',$Date).'</p>';
       $Data = array(
-        'status' = array(
+        'status' => array(
           'timestamp' => date('Y-m-d H:i:s',$Date)
         ),
         'data' => array(
