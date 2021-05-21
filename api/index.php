@@ -155,6 +155,7 @@ if(
 
 //Create Gain/Loss Table for each coin
 $RS = array();
+$TrackedCoins = array();
 foreach($Coins as $Coin){
   $First = true;
   $Symbol = $Coin['Symbol'];
@@ -232,13 +233,23 @@ foreach($Coins as $Coin){
   );
   pd($RS[$Symbol]);
   
-  //Save RSI Table
-  $Filename = strtolower($Symbol).'.json';
-  $Updated = json_encode($JSON,JSON_PRETTY_PRINT);
-  $Result = file_put_contents($Filename,$Updated);
-  
+  //Make a file that shows what coins are being tracked, and then make files for all those coins
+  if($RS[$Symbol]['summary']['RSI-14'] != 100){
+    $Filename = strtolower($Symbol).'.json';
+    $TrackedCoins[$Symbol]=array(
+      'Name'   => $Coins[$Symbol]['Name'],
+      'Symbol' => $Coins[$Symbol]['Symbol'],
+      'Path'   => 'https://rsialert.io/api/'.$Filename;
+    );
+    //Save RSI table to its own file for each coin
+    $Updated = json_encode($RS[$Symbol],JSON_PRETTY_PRINT);
+    $Result = file_put_contents($Filename,$Updated);
+  }
   //Done with this coin
 }
+$Filename = 'coins.json';
+$Updated = json_encode($TrackedCoins,JSON_PRETTY_PRINT);
+$Result = file_put_contents($Filename,$Updated);
 
 
 function Edit($Symbol,$Coins){
