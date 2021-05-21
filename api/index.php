@@ -145,9 +145,17 @@ foreach($Coins as $Coin){
   $Symbol = $Coin['Symbol'];
   $Missing = array();
   echo '<h2>Generating RS-14 Table For '.$Coin['Name'].'</h2>';
-  $RS[$Symbol]=array();
+  $RS[$Symbol]=array(
+    'summary' = array(),
+    'data' => array()
+  );
   $Close = '';
-  for($i = 0; $i <= 14; $i++){
+  $GainSum = 0;
+  $GainCount = 0;
+  $LossSum = 0;
+  $LossCount = 0;
+  //Skip today
+  for($i = 1; $i <= 14; $i++){
     $Date = time() - (60*60*24*$i);
     $Open = '';
     
@@ -162,9 +170,27 @@ foreach($Coins as $Coin){
         }
       }
     }
-   
+    
+    $Change = $Close - $Open;
+    if($Change > 0){
+      $ThisGain = $Change;
+      $ThisLoss = 0;
+      $GainSum += $Change;
+      $GainCount++;
+    }else{
+      $ThisGain = 0;
+      $ThisLoss = $Change;
+      $LossSum += $Change;
+      $LossCount++;
+    }
+    
     //Put the values into the table
-    $RS[$Symbol][date('Y-m-d',$Date)]=array('Open' => $Open,'Close' => $Close);
+    $RS[$Symbol]['data'][date('Y-m-d',$Date)]=array(
+      'Open'  => $Open,
+      'Close' => $Close,
+      'Gain'  => $ThisGain,
+      'Loss'  => $ThisLoss
+    );
     //Carry the open price over to the previous close price
     $Close = $Open;
     //Done with this day for this coin
@@ -173,7 +199,14 @@ foreach($Coins as $Coin){
   if(count($Missing)==0){
     echo '<p><a href="./?action=enterMissing&symbol='.$Symbol.'">Click here</a> to enter missing data for '.$Symbol.'.</p>';
   }
+  $RS[$Symbol]['summary'] = array(
+    'Average Gain'      => $GainSum / $GainCount,
+    'Average Loss'      => $LossSum / $LossCount,
+    'Relative Strength' => 1 + (( $GainSum / $GainCount ) / ($LossSum / $LossCount)),
+    'RSI-14'            => 100 - (100/(1 + (( $GainSum / $GainCount ) / ($LossSum / $LossCount))))
+  );
   pd($RS[$Symbol]);
+  
   //Done with this coin
 }
 
