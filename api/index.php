@@ -80,7 +80,6 @@ for ($i = 0; $i <= 14; $i++) {
         'data' => array()
       );
       foreach($Coins as $Symbol => $Coin){
-        var_dump($Coin);
         $New = array(
           'name'   => $Coin['Name'],
           'symbol' => $Symbol,
