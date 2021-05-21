@@ -127,6 +127,11 @@ if(
     die('Invalid Key.');
   }
   //User is authenticated for secure API requests
+  
+  if(isset($_GET['enterMissing'])){
+    $_GET['action'] = 'enterMissing';
+  }
+  
   switch($_GET['action']){
     case 'enterMissing':
       if(isset($_POST['symbol'])){
@@ -182,7 +187,7 @@ foreach($Coins as $Coin){
 function EnterMissing($Symbol,$Coins){
   echo $First = true;
   echo '<h2>Checking For Missing '.$Symbol.' Data...</h2>'."\n";
-  echo '<form action="./?enterMissing" method="post">'."\n";
+  echo '<form action="./?action=enterMissing" method="post">'."\n";
   echo '<input type="hidden" name="symbol" value="'.$Symbol.'">'."\n";
   echo '<input type="key" name="key" value="'.$_GET['key'].'">'."\n";
   echo '<table>'."\n";
