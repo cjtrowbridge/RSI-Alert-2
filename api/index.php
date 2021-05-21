@@ -120,6 +120,7 @@ foreach($Coins as $Coin){
   $Symbol = $Coin['Symbol'];
   echo '<h2>Generating RS-14 Table For '.$Coin['Name'].'</h2>';
   $RS[$Symbol]=array();
+  $Close = '';
   for($i = 0; $i <= 14; $i++){
     $Date = time() - (60*60*24*$i);
     $Open = '';
@@ -132,11 +133,13 @@ foreach($Coins as $Coin){
       foreach($JSON['data'] as $Coin){
         if($Coin['symbol'] == $Symbol){
           $Open = $Coin['quote']['USD']['price'];
+          
         }
       }
     }
     
-    $RS[$Symbol][date('Y-m-d',$Date)]=array('Open' => $Open);
+    $RS[$Symbol][date('Y-m-d',$Date)]=array('Open' => $Open,'Close' => $Close);
+    $Close = $Open;
   }
   pd($RS[$Symbol]);
 }
