@@ -195,10 +195,9 @@ foreach($Coins as $Coin){
     $Close = $Open;
     //Done with this day for this coin
   } 
-  //If we couldn't some data then prompt the user to input it.
-  if(count($Missing)==0){
-    echo '<p><a href="./?action=edit&symbol='.$Symbol.'">Click here</a> to enter missing data for '.$Symbol.'.</p>';
-  }
+  
+  echo '<p><a href="./?action=edit&symbol='.$Symbol.'">Click here</a> to edit data for '.$Symbol.'.</p>';
+  
   $RS[$Symbol]['summary'] = array(
     'Gain Sum'          => $GainSum,
     'Gain Count'        => $GainCount,
