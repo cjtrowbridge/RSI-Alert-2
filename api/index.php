@@ -145,10 +145,8 @@ foreach($Coins as $Coin){
     //Done with this day for this coin
   } 
   //If we couldn't some data then prompt the user to input it.
-  if(!(empty($Missing))){
+  if(count($Missing)==0)){
     echo '<p><a href="./?action=enterMissing">Click here</a> to enter missing data for '.$Symbol.'.</p>';
-  }else{
-    pd($Missing);
   }
   pd($RS[$Symbol]);
   //Done with this coin
