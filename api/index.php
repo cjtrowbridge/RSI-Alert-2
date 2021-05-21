@@ -146,7 +146,7 @@ foreach($Coins as $Coin){
   $Missing = array();
   echo '<h2>Generating RS-14 Table For '.$Coin['Name'].'</h2>';
   $RS[$Symbol]=array(
-    'summary' = array(),
+    'summary' => array(),
     'data' => array()
   );
   $Close = '';
