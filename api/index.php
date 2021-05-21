@@ -29,8 +29,8 @@ if(
   isset($_GET['action'])
 ){
   //Check API key
+  include_once('Config.php');
   if($_GET['key'] != $LocalKey){
-    include_once('Config.php');
     die('Invalid Key.');
   }
   //User is authenticated for secure API requests
