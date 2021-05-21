@@ -117,12 +117,20 @@ if($Missing == true){
 
 //Offer post-startup api calls
 if(
-  isset($_REQUEST['key']) &&
+  (
+    isset($_GET['key']) ||
+    isset($_POST['key'])
+  ) &&
   isset($_GET['action'])
 ){
   //Check API key
   include_once('Config.php');
-  if($_REQUEST['key'] != $LocalKey){
+  if(
+    (!(
+      $_GET['key'] == $LocalKey ||
+      $_POST['key'] == $LocalKey
+    ))
+  ){
     die('Invalid Key.');
   }
   //User is authenticated for secure API requests
