@@ -194,6 +194,8 @@ function EnterMissing($Symbol){
             
           }
         }
+      }else{
+        echo '<p>Date file missing: '.$Filename.'. Try <a href="./?action=createMissing">creating missing files</a>.</p>';
       }
     }
   }
