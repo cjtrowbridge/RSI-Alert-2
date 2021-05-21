@@ -270,13 +270,13 @@ function HandleEnterMissingPost($Symbol,$Coins){
               //Okay let's update the file with this new value...
               $NewValue = $_POST[$Key];
               $JSON['data'][$Key]['quote']['USD']['price'] = $NewValue;
-              $JSON = json_encode($Data,JSON_PRETTY_PRINT);
+              $JSON = json_encode($Data);
               $Filename = 'cache/'.date('Y-m-d',$Date).'.json';
               file_put_contents($Filename,$JSON);
               echo '<p>File "'.$Filename.'" updated for coin '.$Symbol.'.</p>';
               
             }else{
-              echo '<p>Missing input value for date '.date('Y-m-d',$Date).'.</p>';
+              echo '<p>No update value submitted for date '.date('Y-m-d',$Date).', skipping.</p>';
             }
           }
         }
