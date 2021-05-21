@@ -116,6 +116,10 @@ if($Missing == true){
 }
 
 
+if(isset($_GET['enterMissing'])){
+  $_GET['action'] = 'enterMissing';
+}
+
 //Offer post-startup api calls
 if(
   isset($_GET['key']) &&
@@ -127,11 +131,6 @@ if(
     die('Invalid Key.');
   }
   //User is authenticated for secure API requests
-  
-  if(isset($_GET['enterMissing'])){
-    $_GET['action'] = 'enterMissing';
-  }
-  
   switch($_GET['action']){
     case 'enterMissing':
       if(isset($_POST['symbol'])){
