@@ -116,9 +116,8 @@ if($Missing == true){
 }
 
 
-if(isset($_REQUEST['enterMissing'])){
-  $_GET['action'] = 'enterMissing';
-}
+$_GET['action'] = 'enterMissing';
+
 pd($_REQUEST);
 
 //Offer post-startup api calls
