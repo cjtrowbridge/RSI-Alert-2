@@ -115,10 +115,6 @@ if($Missing == true){
   echo '<p><a href="./?action=createMissing">Click here</a> to create empty files for missing dates.</p>';
 }
 
-
-$_GET['action'] = 'enterMissing';
-pd($_REQUEST);
-
 //Offer post-startup api calls
 if(
   isset($_REQUEST['key']) &&
@@ -247,6 +243,10 @@ function EnterMissing($Symbol,$Coins){
 
 function HandleEnterMissingPost($Symbol,$Coins){
  
+  echo '<h2>Updating Cache</h2>';
+  echo '<h3>Input Recieved;</h3>';
+  pd($_REQUEST);
+  echo '<h3>Working;</h3>';
   $Coin = $Coins[$Symbol];
   
     for($i = 0; $i <= 14; $i++){
