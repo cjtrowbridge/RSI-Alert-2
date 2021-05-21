@@ -153,3 +153,42 @@ foreach($Coins as $Coin){
 }
 
 
+function EnterMissing($Symbol){
+  echo '<h2>Checking For Missing '.$Symbol.' Data...</h2>'."\n";
+  echo '<form action="./?enterMissing" method="post">'."\n";
+  echo '<input type="hidden" name="symbol" value="'.$Symbol.'">'."\n";
+  echo '<table>'."\n";
+  foreach($Coins as $Coin){
+    for($i = 0; $i <= 14; $i++){
+      $Date = time() - (60*60*24*$i);
+      $Open = '';
+
+      //Try to find the open price for this symbol and date
+      $Filename = 'cache/'.date('Y-m-d',$Date).'.json';
+      if(file_exists($Filename)){
+        $Data = file_get_contents($Filename);
+        $JSON = json_decode($Data,true);
+        foreach($JSON['data'] as $Coin){
+          if($Coin['symbol'] == $Symbol){
+            $Open = $Coin['quote']['USD']['price'];
+            
+            echo '  <tr>'."\n";
+            echo '    <td>Date: '.date('Y-m-d',$Date).'</td>'."\n";
+            if($Open==''){
+              //We need to get this value
+              echo '    <td>Open Price: <input type="text" name="'.$Symbol.date('Ymd',$Date).'"></td>'."\n";
+            }else{
+              //We have this value already
+              echo '    <td>Open Price: '.$Open.'</td>'."\n";
+            }
+            echo '  </tr>'."\n";
+            
+          }
+        }
+      }
+    }
+  }
+  echo '</table>'."\n";
+  echo '<input type="submit">'."\n";
+  echo '</form>';
+}
