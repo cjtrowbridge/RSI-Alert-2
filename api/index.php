@@ -45,6 +45,13 @@ if(
     case 'createMissing':
       $CreateMissing = true;
       break;
+    case 'enterMissing':
+      if(isset($_POST['symbol'])){
+        die('Handle enter missing post.');
+      }else{
+        EnterMissing($_POST['symbol']);
+      }
+      break;
   }
 }
 
