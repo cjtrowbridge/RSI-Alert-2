@@ -221,6 +221,8 @@ foreach($Coins as $Coin){
   echo '<p><a href="./?action=edit&symbol='.$Symbol.'">Click here</a> to edit data for '.$Symbol.'.</p>';
   
   $RS[$Symbol]['summary'] = array(
+    'Name'              => $Coins[$Symbol]['Name'],
+    'Symbol'            => $Symbol,
     'Updated'           => date('Y-m-d'),
     'Gain Sum'          => $GainSum,
     'Gain Count'        => $GainCount,
