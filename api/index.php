@@ -198,4 +198,5 @@ function EnterMissing($Symbol){
   echo '</table>'."\n";
   echo '<input type="submit">'."\n";
   echo '</form>';
+  exit;
 }
