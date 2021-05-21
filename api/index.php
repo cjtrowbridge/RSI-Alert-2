@@ -239,7 +239,7 @@ foreach($Coins as $Coin){
     $TrackedCoins[$Symbol]=array(
       'Name'   => $Coins[$Symbol]['Name'],
       'Symbol' => $Coins[$Symbol]['Symbol'],
-      'Path'   => 'https://rsialert.io/api/'.$Filename;
+      'Path'   => 'https://rsialert.io/api/'.$Filename
     );
     //Save RSI table to its own file for each coin
     $Updated = json_encode($RS[$Symbol],JSON_PRETTY_PRINT);
