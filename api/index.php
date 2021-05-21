@@ -49,7 +49,7 @@ if(
       if(isset($_POST['symbol'])){
         die('Handle enter missing post.');
       }else{
-        EnterMissing($_POST['symbol']);
+        EnterMissing($_REQUEST['symbol']);
       }
       break;
   }
@@ -153,7 +153,7 @@ foreach($Coins as $Coin){
   } 
   //If we couldn't some data then prompt the user to input it.
   if(count($Missing)==0){
-    echo '<p><a href="./?action=enterMissing">Click here</a> to enter missing data for '.$Symbol.'.</p>';
+    echo '<p><a href="./?action=enterMissing&symbol='.$Symbol.'">Click here</a> to enter missing data for '.$Symbol.'.</p>';
   }
   pd($RS[$Symbol]);
   //Done with this coin
