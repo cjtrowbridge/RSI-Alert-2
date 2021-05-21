@@ -25,7 +25,9 @@ if(
   echo '<!DOCTYPE html>';
   echo '<p>Authentication Required. Please enter API Key:</p>';
   echo '<form action=./? method="get">';
-  echo '  <input type="hidden" name="action" value="'.$_GET['action'].'">';
+  foreach($_GET as $Key => $Value){
+    echo '  <input type="hidden" name="'.$Key.'" value="'.$Value.'">';
+  }
   echo '  <input type="password" name="key" id="key">';
   echo '  <input type="submit">';
   echo '</form>';
