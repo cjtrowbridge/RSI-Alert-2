@@ -4,13 +4,45 @@ $Filename = 'cache/'.date('Y-m-d').'.json';
 
 if(!(file_exists($Filename))){
   //Need to fetch current quote.
-  include('Config.php');
-  $URL = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY='.$Key;
+  include_once('Config.php');
+  $URL = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY='.$CoinMarketCapKey;
   $Data = file_get_contents($URL);
   file_put_contents($Filename,$Data);
 }
 
+if(
+  isset($_GET['action']) &&
+  (!(isset($_GET['key'])))
+){
+  //Prompt for missing API key
+  echo '<!DOCTYPE html>';
+  echo '<p>Authentication Required. Please enter API Key:</p>';
+  echo '<form action=./? method="get">';
+  echo '  <input type="hidden" name="action" value="'.$_GET['action']'">';
+  echo '  <input type="text" name="key" id="key">';
+  echo '  <input type="submit">';
+  echo '</form>';
+  echo '<script>document.getElementById("key").focus();</script>'
+  exit;
+}elseif(
+  isset($_GET['key']) &&
+  isset($_GET['action'])
+){
+  //Check API key
+  if($_GET['key'] != $LocalKey){
+    include_once('Config.php');
+    die('Invalid Key.');
+  }
+  //User is authenticated for secure API requests
+  switch($_GET['action']){
+    case 'createMissing':
+      die('Create missing files');
+      break;
+  }
+}
+
 $Coins = array();
+$Missing = false;
 
 //Check if we have the last 14 days of data
 for ($i = 0; $i <= 14; $i++) {
@@ -36,9 +68,13 @@ for ($i = 0; $i <= 14; $i++) {
       
     }
   }else{
-    echo 'Data Missing For Date: '.date('Y-m-d',$Date);
-    break;
+    echo '<p>Data Missing For Date: '.date('Y-m-d',$Date).'</p>';
+    $Missing = true;
   }
+}
+
+if($Missing == true){
+  echo '<p><a href="./?action=createMissing">Click here</a> to create empty files for missing dates.</p>'
 }
 
 echo '<pre>';
