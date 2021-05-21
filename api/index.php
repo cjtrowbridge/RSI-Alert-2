@@ -1,5 +1,11 @@
 <?php
 
+function pd($Arr){
+  echo '<pre>';
+  var_dump($Arr);
+  echo '</pre>';
+}
+
 $Filename = 'cache/'.date('Y-m-d').'.json';
 
 if(!(file_exists($Filename))){
@@ -62,7 +68,8 @@ for ($i = 0; $i <= 14; $i++) {
       ){
         $Coins[$Symbol] = array(
           'Name' => $Name, 
-          'Slug' => $Slug,
+          'Slug' => $Slug, 
+          'Symbol' => $Symbol,
           'Timeseries' => array(
             date('Y-m-d',$Date) => $Coin['quote']['USD']['price']
           )
@@ -110,8 +117,8 @@ if($Missing == true){
 //Create Gain/Loss Table for each coin
 $RS = array();
 foreach($Coins as $Coin){
-  echo '<h2>Generating RS Table For '.$Coin['symbol'].'</h2>';
-  var_dump($Coin);
+  echo '<h2>Generating RS Table For '.$Coin['Name'].'</h2>';
+  pd($Coin);
   $RS[$Coin['Symbol']]=array();
   for($i = 0; $i <= 14; $i++){
     $Date = time() - (60*60*24*$i);
@@ -119,4 +126,4 @@ foreach($Coins as $Coin){
   }
 }
 
-var_dump($RS);
+pd($RS);
