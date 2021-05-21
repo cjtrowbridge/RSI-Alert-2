@@ -116,7 +116,7 @@ if($Missing == true){
 }
 
 
-if(isset($_GET['enterMissing'])){
+if(isset($_REQUEST['enterMissing'])){
   $_GET['action'] = 'enterMissing';
 }
 pd($_REQUEST);
