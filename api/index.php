@@ -75,16 +75,16 @@ for ($i = 0; $i <= 14; $i++) {
       echo '<p>Creating missing file: '.date('Y-m-d',$Date).'</p>';
       $Data = array(
         'status' => array(
-          'timestamp' => date('Y-m-d H:i:s',$Date)
+          'timestamp' => date('Y-m-d 00:00:00',$Date)
         ),
         'data' => array()
       );
       foreach($Coins as $Symbol => $Coin){
         var_dump($Coin);
         $New = array(
-          'name'   => $Coin['name'],
+          'name'   => $Coin['Name'],
           'symbol' => $Symbol,
-          'slug'   => $Coin['slug'],
+          'slug'   => $Coin['Slug'],
           'quote' => array(
             'USD' => array(
               'price' => ''
