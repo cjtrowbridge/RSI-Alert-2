@@ -118,6 +118,7 @@ if($Missing == true){
 $RS = array();
 foreach($Coins as $Coin){
   $Symbol = $Coin['Symbol'];
+  $Missing = array();
   echo '<h2>Generating RS-14 Table For '.$Coin['Name'].'</h2>';
   $RS[$Symbol]=array();
   $Close = '';
@@ -133,15 +134,22 @@ foreach($Coins as $Coin){
       foreach($JSON['data'] as $Coin){
         if($Coin['symbol'] == $Symbol){
           $Open = $Coin['quote']['USD']['price'];
-          
         }
       }
     }
-    
+   
+    //Put the values into the table
     $RS[$Symbol][date('Y-m-d',$Date)]=array('Open' => $Open,'Close' => $Close);
+    //Carry the open price over to the previous close price
     $Close = $Open;
+    //Done with this day for this coin
+  } 
+  //If we couldn't some data then prompt the user to input it.
+  if(!(is_empty($Missing))){
+    echo '<p><a href="./?action=enterMissing">Click here</a> to enter missing data for '.$Symbol.'.</p>';
   }
   pd($RS[$Symbol]);
+  //Done with this coin
 }
 
 
