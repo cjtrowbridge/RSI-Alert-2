@@ -18,8 +18,8 @@ for ($i = 0; $i <= 14; $i++) {
   $Filename = 'cache/'.date('Y-m-d',$Date).'.json';
   if(file_exists($Filename)){
     $Data = file_get_contents($Filename);
-    $JSON = json_decode($Data);
-    foreach($JSON->data as $Coin){
+    $JSON = json_decode($Data,true);
+    foreach($JSON['data'] as $Coin){
       $Name = $Coin['name'];
       if(
         (!(isset($Coins[$Name]))) ||
