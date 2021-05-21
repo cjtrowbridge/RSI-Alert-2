@@ -113,7 +113,7 @@ foreach($Coins as $Coin){
   $RS[$Coin['Symbol']]=array();
   for($i = 0; $i <= 14; $i++){
     $Date = time() - (60*60*24*$i);
-    $RS[$Coin['Symbol']][date('Y-m-d',$Date)]=array();
+    $RS[$Coin['symbol']][date('Y-m-d',$Date)]=array();
   }
 }
 
