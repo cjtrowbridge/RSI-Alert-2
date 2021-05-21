@@ -177,8 +177,10 @@ function EnterMissing($Symbol){
       if(file_exists($Filename)){
         $Data = file_get_contents($Filename);
         $JSON = json_decode($Data,true);
+        $Found = false;
         foreach($JSON['data'] as $Coin){
           if($Coin['symbol'] == $Symbol){
+            $Found = true;
             $Open = $Coin['quote']['USD']['price'];
             
             echo '  <tr>'."\n";
@@ -194,6 +196,12 @@ function EnterMissing($Symbol){
             
           }
         }
+        
+        //Check to make sure we found it
+        if($Found == false){
+          echo '<p>'.$Symbol.' not found in '.$Filename.'.</p>';
+        }
+        
       }else{
         echo '<p>Date file missing: '.$Filename.'. Try <a href="./?action=createMissing">creating missing files</a>.</p>';
       }
