@@ -75,9 +75,9 @@ body{
           var rsi = data.summary["RSI-14"];
           var symbol = data.summary["Symbol"];
           if(rsi<=30){
-            $("#"+symbol).css("background-color","green")
-          }elseif(rsi>=70){
-            $("#"+symbol).css("background-color","red")
+            $("#"+symbol).css("background-color","green");
+          }else if(rsi>=70){
+            $("#"+symbol).css("background-color","red");
           }
           
           $.each(data, function(i, item){
