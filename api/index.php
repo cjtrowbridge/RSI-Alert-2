@@ -270,9 +270,9 @@ function HandleEnterMissingPost($Symbol,$Coins){
               //Okay let's update the file with this new value...
               $NewValue = $_POST[$Key];
               $JSON['data'][$Key]['quote']['USD']['price'] = $NewValue;
-              $JSON = json_encode($Data);
+              $Updated = json_encode($JSON,JSON_PRETTY_PRINT);
               $Filename = 'cache/'.date('Y-m-d',$Date).'.json';
-              file_put_contents($Filename,$JSON);
+              file_put_contents($Filename,$Updated);
               echo '<p>File "'.$Filename.'" updated for coin '.$Symbol.'.</p>';
               
             }else{
