@@ -122,16 +122,16 @@ if(isset($_GET['enterMissing'])){
 
 //Offer post-startup api calls
 if(
-  isset($_GET['key']) &&
-  isset($_GET['action'])
+  isset($_REQUEST['key']) &&
+  isset($_REQUEST['action'])
 ){
   //Check API key
   include_once('Config.php');
-  if($_GET['key'] != $LocalKey){
+  if($_REQUEST['key'] != $LocalKey){
     die('Invalid Key.');
   }
   //User is authenticated for secure API requests
-  switch($_GET['action']){
+  switch($_REQUEST['action']){
     case 'enterMissing':
       if(isset($_POST['symbol'])){
         
