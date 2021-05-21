@@ -92,7 +92,9 @@ for ($i = 0; $i <= 14; $i++) {
         );
         $Data['data'][]=$New;
       }
-      var_dump($Data);
+      $JSON = json_encode($Data,JSON_PRETTY_PRINT);
+      $Filename = 'cache/'.date('Y-m-d',$Date).'.json';
+      file_put_contents($Filename,$JSON);
     }else{
       echo '<p>Data Missing For Date: '.date('Y-m-d',$Date).'</p>';
       $Missing = true;
