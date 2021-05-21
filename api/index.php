@@ -35,4 +35,5 @@ for ($i = 0; $i <= 14; $i++) {
   }
 }
 
+echo '<pre>';
 var_dump($Coins);
