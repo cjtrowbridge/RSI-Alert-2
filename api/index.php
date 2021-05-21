@@ -180,7 +180,7 @@ foreach($Coins as $Coin){
     }else{
       $ThisGain = 0;
       $ThisLoss = $Change;
-      $LossSum += $Change;
+      $LossSum += (0-$Change);
       $LossCount++;
     }
     
