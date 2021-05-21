@@ -30,7 +30,8 @@ for ($i = 0; $i <= 14; $i++) {
       
     }
   }else{
-    die('Data Missing For Date: '.date('Y-m-d',$Date));
+    echo 'Data Missing For Date: '.date('Y-m-d',$Date);
+    break;
   }
 }
 
