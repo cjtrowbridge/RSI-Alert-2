@@ -82,7 +82,7 @@ body{
             $("#"+symbol).css("background-color","#e65054");
             indicator = "overbought";
           }
-          $("#"+symbol).find(".content").html("Current RSI-14 value is "+rsi+" which indicates "+indicator+".");
+          $("#"+symbol).find(".content").html("Current RSI-14 value is "+rsi+" which indicates <a href=\"https://www.investopedia.com/terms/r/rsi.asp\" target=\"\">"+indicator+"</a>.");
           
         });
       });
