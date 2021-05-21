@@ -117,13 +117,15 @@ if($Missing == true){
 //Create Gain/Loss Table for each coin
 $RS = array();
 foreach($Coins as $Coin){
-  echo '<h2>Generating RS Table For '.$Coin['Name'].'</h2>';
-  pd($Coin);
-  $RS[$Coin['Symbol']]=array();
+  $Symbol = $Coin['Symbol'];
+  echo '<h2>Generating RS-14 Table For '.$Coin['Name'].'</h2>';
+  $RS[$Symbol]=array();
   for($i = 0; $i <= 14; $i++){
     $Date = time() - (60*60*24*$i);
-    $RS[$Coin['symbol']][date('Y-m-d',$Date)]=array();
+    $RS[$Symbol][date('Y-m-d',$Date)]=array();
+    
   }
+  pd($RS[$Symbol]);
 }
 
-pd($RS);
+
