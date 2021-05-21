@@ -184,7 +184,9 @@ function EnterMissing($Symbol,$Coins){
   echo '<input type="hidden" name="symbol" value="'.$Symbol.'">'."\n";
   echo '<table>'."\n";
   
-  foreach($Coins as $Coin){
+  $Coin = $Coins[$Symbol];
+  
+  //foreach($Coins as $Coin){
     for($i = 0; $i <= 14; $i++){
       $Date = time() - (60*60*24*$i);
       $Open = '';
@@ -223,7 +225,7 @@ function EnterMissing($Symbol,$Coins){
         echo '<p>Date file missing: '.$Filename.'. Try <a href="./?action=createMissing">creating missing files</a>.</p>';
       }
     }
-  }
+  //}
   echo '</table>'."\n";
   echo '<input type="submit">'."\n";
   echo '</form>';
