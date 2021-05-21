@@ -289,5 +289,6 @@ function HandleEnterMissingPost($Symbol,$Coins){
         echo '<p>Date file missing: '.$Filename.'. Try <a href="./?action=createMissing">creating missing files</a>.</p>';
       }
     }
+  echo '<p>Done! <a href="./">Back To Home</a></p>';
   exit;
 }
