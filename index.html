@@ -78,13 +78,14 @@ body{
           var OverboughtPrice = data.summary["OverboughtPrice"];
           var indicator = "nothing";
           
-          if(rsi<=30){
+          if(rsi <= 30){
             $("#"+symbol).css("background-color","#68de7c");
             indicator = "oversold";
-          }else if(rsi>=70){
+          }else if(rsi >= 70){
             $("#"+symbol).css("background-color","#e65054");
             indicator = "overbought";
           }
+          console.log(rsi);
           if(
             (rsi > 30) &&
             (rsi < 70)
