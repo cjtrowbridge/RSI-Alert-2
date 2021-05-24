@@ -195,7 +195,9 @@ foreach($Coins as $Coin){
     }
     
     $Change = $Close - $Open;
-    $Datapoints++;
+    if($Open > 0){
+      $Datapoints++;
+    }
     if($Change > 0){
       $ThisGain = $Change;
       $ThisLoss = 0;
