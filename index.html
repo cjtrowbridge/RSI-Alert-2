@@ -84,12 +84,7 @@ body{
           }else if(rsi >= 70){
             $("#"+symbol).css("background-color","#e65054");
             indicator = "overbought";
-          }
-          console.log(rsi);
-          if(
-            (rsi > 30) &&
-            (rsi < 70)
-          ){
+          }else{
             $("#"+symbol).find(".content").append("<p style=\"color: #68de7c;\">In order to reach oversold, the price today would have to move to "+OversoldPrice+".</p>");
             $("#"+symbol).find(".content").append("<p style=\"color: #e65054;\">In order to reach overbought, the price today would have to move to "+OverboughtPrice+".</p>");
           }
