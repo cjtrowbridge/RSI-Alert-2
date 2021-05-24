@@ -2,6 +2,10 @@
 
 console.log('WORKER: executing.');
 
+function get_url_extension( url ) {
+    return url.split(/[#?]/)[0].split('.').pop().trim();
+}
+
 /* A version number is useful when updating the worker logic,
    allowing you to remove outdated cache entries during the update.
 */
@@ -65,6 +69,15 @@ self.addEventListener("fetch", function(event) {
        the network as usual.
     */
     console.log('WORKER: fetch event ignored.', event.request.method, event.request.url);
+    return;
+  }
+  /* We should not cache JSON requests.
+  */
+  if (get_url_extension(event.request.url) !== 'json') {
+    /* If we don't block the event as shown below, then the request will go to
+       the network as usual.
+    */
+    console.log('WORKER: JSON fetch event ignored.');
     return;
   }
   /* Similar to event.waitUntil in that it blocks the fetch event on a promise.
