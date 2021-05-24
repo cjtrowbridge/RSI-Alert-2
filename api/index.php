@@ -249,7 +249,7 @@ foreach($Coins as $Coin){
   }
   
   //Make a file that shows what coins are being tracked, and then make files for all those coins
-  if($RS[$Symbol]['summary']['RSI-14'] != 100){
+  if($RS[$Symbol]['summary']['Datapoints'] == 14){
     $Filename = strtolower($Symbol).'.json';
     $TrackedCoins[$Symbol]=array(
       'Name'   => $Coins[$Symbol]['Name'],
