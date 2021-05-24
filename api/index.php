@@ -165,6 +165,7 @@ foreach($Coins as $Coin){
     'summary' => array(),
     'data' => array()
   );
+  $Datapoints = 0;
   $Close = '';
   $GainSum = 0;
   $GainCount = 0;
@@ -194,6 +195,7 @@ foreach($Coins as $Coin){
     }
     
     $Change = $Close - $Open;
+    $Datapoints++;
     if($Change > 0){
       $ThisGain = $Change;
       $ThisLoss = 0;
@@ -208,10 +210,10 @@ foreach($Coins as $Coin){
     
     //Put the values into the table
     $RS[$Symbol]['data'][date('Y-m-d',$Date)]=array(
-      'Open'  => $Open,
-      'Close' => $Close,
-      'Gain'  => $ThisGain,
-      'Loss'  => $ThisLoss
+      'Open'       => $Open,
+      'Close'      => $Close,
+      'Gain'       => $ThisGain,
+      'Loss'       => $ThisLoss
     );
     //Carry the open price over to the previous close price
     $Close = $Open;
@@ -224,6 +226,7 @@ foreach($Coins as $Coin){
     'Name'              => $Coins[$Symbol]['Name'],
     'Symbol'            => $Symbol,
     'Updated'           => date('Y-m-d'),
+    'Datapoints'        => $Datapoints,
     'Gain Sum'          => $GainSum,
     'Gain Count'        => $GainCount,
     'Average Gain'      => $GainSum / $GainCount,
