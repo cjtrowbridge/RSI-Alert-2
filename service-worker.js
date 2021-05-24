@@ -77,7 +77,7 @@ self.addEventListener("fetch", function(event) {
     /* If we don't block the event as shown below, then the request will go to
        the network as usual.
     */
-    console.log('WORKER: JSON fetch event ignored.');
+    console.log('WORKER: JSON fetch event ignored.',event.request.url);
     return;
   }
   /* Similar to event.waitUntil in that it blocks the fetch event on a promise.
