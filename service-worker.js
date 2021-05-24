@@ -73,7 +73,7 @@ self.addEventListener("fetch", function(event) {
   }
   /* We should not cache JSON requests.
   */
-  if (get_url_extension(event.request.url) !== 'json') {
+  if (get_url_extension(event.request.url) == 'json') {
     /* If we don't block the event as shown below, then the request will go to
        the network as usual.
     */
